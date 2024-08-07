@@ -1,60 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class CoinManager : MonoBehaviour
 {
-    
     public GameObject coin;
     public float maxX;
     public Transform spawnPoint;
-    public float spawnRate;
+    public float spawnRate = 2f; // Default spawn rate
+    public float spawnRateDecreaseInterval = 1f; // Interval for spawn rate decrease
+    public float spawnRateDecreaseAmount = 0.5f;  // Amount to decrease the spawn rate by
+    public float minSpawnRate = 0.1f; // Minimum spawn rate threshold
     bool gameStarted = false;
-    // public GameObject tapText;
     public TextMeshProUGUI scoreText;
     int score = 0;
 
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !gameStarted)
         {
             StartSpawning();
             gameStarted = true;
-            // tapText.SetActive(false);
         }
     }
 
     void StartSpawning()
     {
-        InvokeRepeating("SpawnCoin",0.5f,spawnRate);
+        InvokeRepeating("SpawnCoin", 0.5f, spawnRate);
+        StartCoroutine(DecreaseSpawnRateOverTime());
     }
 
     private void SpawnCoin()
     {
         Vector3 spawnPos = spawnPoint.position;
-
-        spawnPos.x = Random.Range(-maxX,maxX);
-
+        spawnPos.x = Random.Range(-maxX, maxX);
         Instantiate(coin, spawnPos, Quaternion.identity);
+    }
 
-        // score++;
-
-        // scoreText.text = score.ToString();
+    IEnumerator DecreaseSpawnRateOverTime()
+    {
+        while (gameStarted)
+        {
+            yield return new WaitForSeconds(spawnRateDecreaseInterval);
+            spawnRate = Mathf.Max(minSpawnRate, spawnRate - spawnRateDecreaseAmount); // Ensuring spawnRate doesn't go below the minimum threshold
+            CancelInvoke("SpawnCoin");
+            InvokeRepeating("SpawnCoin", 0.5f, spawnRate);
+        }
     }
 
     public void IncreaseScore(int x)
     {
-        score+=x;
+        score += x;
         scoreText.text = score.ToString();
-        // GameOverScore finalScore = FindObjectOfType<GameOverScore>();
-            
-        // finalScore.Score(score);
     }
-    public int FinalScore(){
+
+    public int FinalScore()
+    {
         return score;
     }
 }
