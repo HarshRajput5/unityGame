@@ -5,7 +5,7 @@ using TMPro;
 //using System.Numerics;
 using UnityEngine;
 
-public class ManagerGame : MonoBehaviour
+public class ManagerGame1 : MonoBehaviour
 {
 
     public GameObject block;
@@ -13,14 +13,19 @@ public class ManagerGame : MonoBehaviour
     public Transform spawnPoint;
     public float spawnRate;
     bool gameStarted = false;
-    public GameObject tapText;
+    // public GameObject tapText;
     public float spawnRateDecreaseInterval = 1f; // Interval for spawn rate decrease
     public float spawnRateDecreaseAmount = 0.1f;  // Amount to decrease the spawn rate by
     public float minSpawnRate = 0.5f; // Minimum spawn rate threshold
-    public GameObject manager;
+
     // public TextMeshProUGUI scoreText;
     // int score = 0;
-
+    public void Setup()
+    {
+        gameObject.SetActive(true);
+        // Debug.Log($"Final score: {score}");
+        // SendScoreToFlutter(score);
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,9 +34,8 @@ public class ManagerGame : MonoBehaviour
         {
             StartSpawning();
             gameStarted = true;
-            tapText.SetActive(false);
+            // tapText.SetActive(false);
         }
-        Invoke("Manager1",10f);
     }
 
     void StartSpawning()
@@ -39,12 +43,6 @@ public class ManagerGame : MonoBehaviour
         InvokeRepeating("SpawnBlock",0.5f,spawnRate);
         StartCoroutine(DecreaseSpawnRateOverTime());
     
-    }
-
-    void Manager1(){
-        // ManagerGame1 manager = FindObjectOfType<ManagerGame1>();
-        manager.SetActive(true);
-            // overGame.Setup(coinManager.FinalScore());
     }
 
     private void SpawnBlock()

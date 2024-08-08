@@ -13,27 +13,9 @@ public class OverGame : MonoBehaviour
 
     public void Setup(int score)
     {
-        // FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-
-        // DocumentReference docRef = db.Collection("users").Document("alovelace");
-        // Dictionary<string, object> user = new Dictionary<string, object>
-        // {
-        //         { "Score", score },
-        // };
-        // docRef.SetAsync(user).ContinueWithOnMainThread(task => {
-        //         Debug.Log("Added data to the alovelace document in the users collection.");
-        // });
-
-        // DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         gameObject.SetActive(true);
         Debug.Log($"Final score: {score}");
         SendScoreToFlutter(score);
-        // WebGLPlugin webGLPlugin = gameObject.AddComponent<WebGLPlugin>();
-        // string uid = webGLPlugin.GetUid();
-        // Debug.Log($"UID: {uid}");
-
-        // reference.Child("users").Child(uid).SetValueAsync(score);
-        // pointsText.text = score.ToString();
     }
 
     public void SendScoreToFlutter(int score)
