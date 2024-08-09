@@ -318,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &189611373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1921,7 +1921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1713174236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   block: {fileID: 7168598382188071962, guid: 61313db7ed686a841b0cd12e4d61112a, type: 3}
   maxX: 2.25
   spawnPoint: {fileID: 1796147609}
-  spawnRate: 1
+  spawnRate: 1.5
   spawnRateDecreaseInterval: 1
   spawnRateDecreaseAmount: 0.1
   minSpawnRate: 0.5
